@@ -69,6 +69,7 @@ clear_screen:
     ret
 
 start_protected_mode:
+    call KERNEL_OFFSET
     jmp $
 
 message:
