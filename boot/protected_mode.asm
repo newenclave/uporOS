@@ -1,6 +1,7 @@
 
 VIDEO_MEMORY equ 0xb8000
-WHITE_BLACK  equ 0x0A
+WHITE_BLACK  equ 0x0F
+GREEN_BLACK  equ 0x0A
 
 [bits 16]
 
@@ -37,7 +38,7 @@ print_message:
 
     print_message_loop:
         mov al, [ebx]
-        mov ah, WHITE_BLACK
+        mov ah, GREEN_BLACK
         cmp al, 0
         je  print_message_exit
         mov [edx], ax
