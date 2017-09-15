@@ -1,3 +1,6 @@
+
+;; boot start
+
 [bits 16]
 [org 0x7c00]
 
@@ -8,14 +11,6 @@
     call print_real
 
     jmp enter_protected
-
-enter_protected:
-    cli
-    lgdt [gdt_descriptor]
-    mov eax, cr0
-    or  eax, 0x01
-    mov cr0, eax
-    jmp CODE_SEG:init_pm
 
 hello_message:
     db 'Real mode start', 10, 13, 0
