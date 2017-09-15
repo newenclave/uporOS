@@ -31,6 +31,7 @@ print_hex:
 
         add dl, '0'
         mov [bx], dl
+    
         mov dx, ax
         shl dx, 4
         and dx, 0xF0
