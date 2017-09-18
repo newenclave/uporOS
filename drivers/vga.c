@@ -99,12 +99,11 @@ void print(char *message)
 void scroll( )
 {
     char *video_mem = (char *)VIDEO_MEMORY_ADDRESS;    
-    for( int i=0; i<(MAX_ROWS-1); ++i ) {
-        //int src = calc_cursor_offset( 0, i + 1);
-        //int dst = calc_cursor_offset( 0, i );
-        //memcopy( &video_mem[src], &video_mem[dst], MAX_COLS * 2 );
-
+    for( int i=1; i<MAX_ROWS; ++i ) {
+        int src = calc_cursor_offset( 0, i );
+        int dst = calc_cursor_offset( 0, i - 1);
+        memcopy( &video_mem[src], &video_mem[dst], MAX_COLS * 2 );
     }
-    //mem_set(&video_mem[MAX_ROWS-1], ' ', MAX_COLS * 2);
-    //set_cursor_pos(MAX_COLS - 1, 0);
+    mem_set(&video_mem[MAX_ROWS-1], ' ', MAX_COLS * 2);
+    set_cursor_pos(MAX_COLS - 1, 0);
 }

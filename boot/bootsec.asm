@@ -22,7 +22,7 @@ load_kernel:
     mov bx, MESSAGE_LOAD_KERNEL
     call print_real
     mov  bx, KERNEL_OFFSET
-    mov  dh, 2
+    mov  dh, 15
     mov  dl, [BOOT_DRIVE]
     call disk_load
     ret

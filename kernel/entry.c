@@ -3,5 +3,5 @@
 void main( ) 
 {
 	clear_screen( );
-	print("Hello,\n\n\nworld!");
+	print("Hello,\nworld!");
 }
