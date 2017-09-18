@@ -25,8 +25,11 @@ image: boot/bootsec.bin kernel.bin
 %.bin: %.asm
 	${ASMC} $< -f bin -I"boot/" -o $@
 
-kernel.bin: kernel/entry.o ${OBJ}
+kernel.bin: kernel_entry.o ${OBJ}
 	${LD} -o $@ -Ttext 0x1000 $^ --oformat binary
+
+kernel_entry.o: kernel/kernel_entry.asm
+	${ASMC} $< -f elf64 -o $@
 
 clean:
 	rm -fr *.o *.bin

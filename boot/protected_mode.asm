@@ -70,7 +70,6 @@ clear_screen:
 
 start_protected_mode:
     call KERNEL_OFFSET
-    jmp $
 
 message:
     db 'uporOS has just entered protected mode!', 0
