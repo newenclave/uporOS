@@ -1,6 +1,8 @@
+#include "../drivers/vga.h"
 
-void main () 
+void main( ) 
 {
-	
+	clear_screen( );
+	print("Hello!");
 }
 

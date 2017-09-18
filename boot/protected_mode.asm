@@ -28,8 +28,8 @@ init_protected:
     mov esp, ebp
 
     call clear_screen
-    mov  ebx, message
-    call print_message
+    ;mov  ebx, message
+    ;call print_message
 
     jmp start_protected_mode
 
