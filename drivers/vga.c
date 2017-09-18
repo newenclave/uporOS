@@ -10,6 +10,18 @@ int calc_cursor_offset( int col, int row )
     return (row * MAX_COLS + col) * 2;
 }
 
+static 
+int get_offset_row(int offset)
+{
+    return offset / MAX_COLS / 2;
+}
+
+static 
+int get_offset_col(int offset)
+{
+    return (offset / 2) % MAX_COLS;
+}
+    
 int get_cursor_pos( )
 {
     int res;
@@ -42,14 +54,24 @@ void print_char(char c, int col, int raw, char attr)
     char *video_mem = (char *)VIDEO_MEMORY_ADDRESS;
     int offset;
     if(attr == 0) {
-        attr = WHITE_ON_BLACK;        
+        attr = WHITE_ON_BLACK;
     }
 
     if(col >= 0 && raw >= 0) {
         offset = calc_cursor_offset(raw, col);
     } else {
-        offset = get_cursor_pos( ); 
+        offset = get_cursor_pos( );
     }
+
+    switch(c) {
+        case '\n':
+            offset  = calc_cursor_offset( MAX_COLS-1,
+                         get_offset_row(offset) );
+            break;
+        default:
+            break;
+    }
+
     video_mem[offset] = c;
     video_mem[offset + 1] = attr;
     set_cursor(offset + 2);
