@@ -3,7 +3,7 @@
 
 #include "vga.h"
 #include "inout.h"
-#include "../kernel/memory.h"
+#include "kernel/memory.h"
 
 static
 int calc_cursor_offset( int col, int row )
@@ -99,11 +99,13 @@ void print(char *message)
 void scroll( )
 {
     char *video_mem = (char *)VIDEO_MEMORY_ADDRESS;    
+    int offset = get_cursor_pos( );
     for( int i=1; i<MAX_ROWS; ++i ) {
         int src = calc_cursor_offset( 0, i );
         int dst = calc_cursor_offset( 0, i - 1);
-        memcopy( &video_mem[src], &video_mem[dst], MAX_COLS * 2 );
+        k_memcpy( &video_mem[src], &video_mem[dst], MAX_COLS * 2 );
     }
-    mem_set(&video_mem[MAX_ROWS-1], ' ', MAX_COLS * 2);
+
+    k_memset(calc_cursor_offset(0, MAX_ROWS - 2), ' ', MAX_COLS * 2);
     set_cursor_pos(MAX_COLS - 1, 0);
 }

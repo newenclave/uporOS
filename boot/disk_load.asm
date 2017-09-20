@@ -21,6 +21,7 @@ disk_error_check:
     jne disk_error_msg
     ret
 
+
 disk_error_msg:
     mov  bx, DISK_ERROR_MSG
     call print_real
